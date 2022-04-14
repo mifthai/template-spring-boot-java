@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * <p>Title       :   ShopingCartController
+ * <p>Title       :   ShoppingCartController
  * <p>Description :
  */
 @RestController

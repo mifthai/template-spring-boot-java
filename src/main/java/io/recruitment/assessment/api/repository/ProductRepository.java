@@ -13,8 +13,8 @@ import java.util.List;
  */
 @Repository
 public interface ProductRepository extends PagingAndSortingRepository<Product, Long> {
-    @Query("SELECT product FROM Product product WHERE product.code LIKE CONCAT('%',:code,'%')")
-    List<Product> findAllByCodeContains(String code);
+    @Query("SELECT product FROM Product product WHERE product.description LIKE CONCAT('%',:searchText,'%')")
+    List<Product> findAllByCodeContains(String searchText);
 
     Product findProductByCode(String code);
 }
