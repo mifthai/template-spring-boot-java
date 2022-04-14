@@ -20,8 +20,8 @@ public class ShoppingCartController {
 
   @PostMapping("/addItemToCart")
   public @ResponseBody
-  List<ShoppingItemDTO> addItem(@RequestBody ShoppingItemDTO addedItem){
-      return orderService.addShoppingItem(addedItem);
+  List<ShoppingItemDTO> addItem(@RequestBody ShoppingItemDTO addedItem, @RequestParam(name = "userCode") String userCode){
+      return orderService.addShoppingItem(addedItem, userCode);
   }
 
   @PostMapping("/removeItemFromCart")

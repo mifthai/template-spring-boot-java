@@ -21,6 +21,10 @@ public class DeliveryOrder {
 
   private int status;
 
+  @ManyToOne
+  @JoinColumn(name="user_id", nullable=false)
+  private User user;
+
   public DeliveryOrder() {
   }
 
@@ -61,6 +65,14 @@ public class DeliveryOrder {
 
   public void setStatus(int status) {
     this.status = status;
+  }
+
+  public User getUser() {
+    return user;
+  }
+
+  public void setUser(User user) {
+    this.user = user;
   }
 }
 

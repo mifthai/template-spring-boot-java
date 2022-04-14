@@ -1,6 +1,7 @@
 package io.recruitment.assessment.api.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  * <p>Title       :   User
@@ -20,8 +21,8 @@ public class User {
 
   private int userType;
 
-  //private UserPrevilage [] userPrevilages;
-
+  @OneToMany(mappedBy="user")
+  private Set<DeliveryOrder> orders;
 
   public User() {
   }
@@ -63,6 +64,14 @@ public class User {
 
   public void setUserType(int userType) {
     this.userType = userType;
+  }
+
+  public Set<DeliveryOrder> getOrders() {
+    return orders;
+  }
+
+  public void setOrders(Set<DeliveryOrder> orders) {
+    this.orders = orders;
   }
 }
 

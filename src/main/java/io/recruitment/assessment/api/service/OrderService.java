@@ -26,22 +26,28 @@ public class OrderService {
   @Autowired
   private OrderedProductsRepository orderedProductsRepository;
 
-  public List<ShoppingItemDTO> addShoppingItem(ShoppingItemDTO shoppingItemDTO){
+  @Autowired
+  private UserRepository userRepository;
+
+  public List<ShoppingItemDTO> addShoppingItem(ShoppingItemDTO shoppingItemDTO, String userCode){
     DeliveryOrder deliveryOrder = null;
     List<ShoppingItemDTO> out = new ArrayList<>();
+    User user = userRepository.findByUserName(userCode);
     if (shoppingItemDTO.getOrderId() > 0){
       Optional<DeliveryOrder> orderOpt = orderRepository.findById(shoppingItemDTO.getOrderId());
       if( orderOpt.isPresent()) {
         deliveryOrder = orderOpt.get();
       }
     }
-    else{
-      deliveryOrder = orderRepository.save(new DeliveryOrder());
+    else {
+      deliveryOrder = new DeliveryOrder();
+      deliveryOrder.setUser(user);
+      deliveryOrder = orderRepository.save(deliveryOrder);
     }
 
     if(deliveryOrder != null) {
       Product product = productRepository.findProductByCode(shoppingItemDTO.getOrderedProduct().getProductCode());
-      if (product != null) {
+      if (product != null && user != null) {
         Set<OrderedProducts> orderedProductsSet = deliveryOrder.getProductsSet();
         orderedProductsSet = orderedProductsSet != null ? orderedProductsSet: new HashSet<>();
         OrderedProductCompositeKey orderedProductCompositeKey  = new OrderedProductCompositeKey(product.getId(), deliveryOrder.getId());
@@ -66,7 +72,7 @@ public class OrderService {
         orderedProductsSet.add(orderedProduct);
 
         deliveryOrder.setProductsSet(orderedProductsSet);
-
+        deliveryOrder.setUser(user);
         DeliveryOrder newDeliveryOrder = orderRepository.save(deliveryOrder);
 
         orderedProductsSet = newDeliveryOrder.getProductsSet();
