@@ -1,6 +1,15 @@
 spring:
+  jpa:
+    hibernate:
+      ddl-auto: 'update'
+    database-platform: 'org.hibernate.dialect.MySQL5Dialect'
+    show-sql: true
   datasource:
     username: 'db_user'
     password: '8b3b91c7'
     url: 'jdbc:mysql://localhost:3306/assessment'
+    driver-class-name: 'com.mysql.cj.jdbc.Driver'
+adminUser:
+  userName: 'Admin'
+  defaultPassword: 'Admin123'
 
