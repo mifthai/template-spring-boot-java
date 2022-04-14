@@ -5,7 +5,7 @@ public enum UserType {
   CUSTOMER,
   UNKNOWN;
 
-  public UserType getUserType(int userType){
+  public static UserType getUserType(int userType){
       switch (userType) {
         case 0: return ADMIN;
         case 1: return CUSTOMER;

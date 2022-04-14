@@ -40,7 +40,7 @@ public class OrderService {
     }
 
     if(deliveryOrder != null) {
-      Product product = productRepository.findProductByCode(shoppingItemDTO.getOrderedProductDTO().getProductCode());
+      Product product = productRepository.findProductByCode(shoppingItemDTO.getOrderedProduct().getProductCode());
       if (product != null) {
         Set<OrderedProducts> orderedProductsSet = deliveryOrder.getProductsSet();
         orderedProductsSet = orderedProductsSet != null ? orderedProductsSet: new HashSet<>();
@@ -57,7 +57,7 @@ public class OrderService {
         else {
           orderedProduct = optProducts.get();
         }
-        orderedProduct.setOrderQty(shoppingItemDTO.getOrderedProductDTO().getQuantity());
+        orderedProduct.setOrderQty(shoppingItemDTO.getOrderedProduct().getQuantity());
         orderedProduct.setUnitPrice(product.getPrice());
 
         // I am not sure, this is the correct way ??
@@ -74,7 +74,7 @@ public class OrderService {
         for (OrderedProducts orderedProducts:orderedProductsSet) {
           item = new ShoppingItemDTO();
           item.setOrderId(newDeliveryOrder.getId());
-          item.setOrderedProductDTO(new OrderedProductDTO(orderedProducts.getProduct().getCode(), orderedProducts.getOrderQty()));
+          item.setOrderedProduct(new OrderedProductDTO(orderedProducts.getProduct().getCode(), orderedProducts.getOrderQty()));
           out.add(item);
         }
       }
@@ -94,7 +94,7 @@ public class OrderService {
     }
 
     if(deliveryOrder != null) {
-      Product product = productRepository.findProductByCode(shoppingItemDTO.getOrderedProductDTO().getProductCode());
+      Product product = productRepository.findProductByCode(shoppingItemDTO.getOrderedProduct().getProductCode());
       if (product != null) {
         Set<OrderedProducts> orderedProductsSet = deliveryOrder.getProductsSet();
         orderedProductsSet = orderedProductsSet != null ? orderedProductsSet: new HashSet<>();
@@ -103,7 +103,7 @@ public class OrderService {
         orderedProduct.setProduct(product);
         orderedProduct.setDeliveryOrder(deliveryOrder);
         orderedProduct.setId(new OrderedProductCompositeKey(product.getId(), deliveryOrder.getId()));
-        orderedProduct.setOrderQty(shoppingItemDTO.getOrderedProductDTO().getQuantity());
+        orderedProduct.setOrderQty(shoppingItemDTO.getOrderedProduct().getQuantity());
         orderedProduct.setUnitPrice(product.getPrice());
         // I am not sure, this is the correct way ??
         orderedProductsRepository.delete(orderedProduct);
@@ -119,7 +119,7 @@ public class OrderService {
         for (OrderedProducts orderedProducts:orderedProductsSet) {
           item = new ShoppingItemDTO();
           item.setOrderId(newDeliveryOrder.getId());
-          item.setOrderedProductDTO(new OrderedProductDTO(orderedProducts.getProduct().getCode(), orderedProducts.getOrderQty()));
+          item.setOrderedProduct(new OrderedProductDTO(orderedProducts.getProduct().getCode(), orderedProducts.getOrderQty()));
           out.add(item);
         }
       }

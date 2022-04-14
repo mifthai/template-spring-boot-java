@@ -6,7 +6,7 @@ package io.recruitment.assessment.api.dto;
  */
 public class ShoppingItemDTO {
   private long orderId;
-  private OrderedProductDTO orderedProductDTO;
+  private OrderedProductDTO orderedProduct;
 
   public long getOrderId() {
     return orderId;
@@ -16,12 +16,12 @@ public class ShoppingItemDTO {
     this.orderId = orderId;
   }
 
-  public OrderedProductDTO getOrderedProductDTO() {
-    return orderedProductDTO;
+  public OrderedProductDTO getOrderedProduct() {
+    return orderedProduct;
   }
 
-  public void setOrderedProductDTO(OrderedProductDTO orderedProductDTO) {
-    this.orderedProductDTO = orderedProductDTO;
+  public void setOrderedProduct(OrderedProductDTO orderedProduct) {
+    this.orderedProduct = orderedProduct;
   }
 }
 

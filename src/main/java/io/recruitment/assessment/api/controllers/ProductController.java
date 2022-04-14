@@ -21,7 +21,7 @@ public class ProductController {
   private ProductService productService;
 
   @PostMapping("/save")
-  public @ResponseBody ProductDTO addProduct(@RequestBody ProductDTO product){
+  public @ResponseBody ProductDTO addProduct(@RequestBody ProductDTO product, @RequestParam(name = "userType") String userType){
      return productService.createProduct(product);
   }
 
